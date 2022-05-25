@@ -43,7 +43,7 @@ export class CrudService implements OnInit {
   getAllVotes(): Array<VoteResult> {
     let voteResults: Array<VoteResult> = [];
 
-    this.dbInstance.executeSql(`SELECT votestr, COUNT(*) AS qtd FROM vote WHERE votestr IN (SELECT numbercand from candidate)  GROUP BY votestr`, []).then((res) => {
+    this.dbInstance.executeSql(`SELECT votestr, COUNT(*) AS qtd FROM vote WHERE votestr IN (SELECT numbercand from candidate)  GROUP BY votestr ORDER BY qtd desc`, []).then((res) => {
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           voteResults.push(new VoteResult(res.rows.item(i).votestr, res.rows.item(i).qtd));

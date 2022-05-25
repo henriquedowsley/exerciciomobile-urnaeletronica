@@ -39,9 +39,11 @@ export class Tab2Page implements OnInit {
   onChangeInput(){
     this.nameC = '';
     this.partyC = '';
-    this.crud.getCandidateInfo(this.voteInput).then((res) => {
-      this.nameC = res['nameCand'];
-      this.partyC = res['partyCand'];
-    })
+    if (String(this.voteInput).length > 0){
+      this.crud.getCandidateInfo(this.voteInput).then((res) => {
+        this.nameC = res['nameCand'];
+        this.partyC = res['partyCand'];
+      })
+    }
   }
 }
